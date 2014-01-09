@@ -4,12 +4,11 @@ node[:deploy].each do |application, deploy|
     next
   end
 
-  template "#{deploy[:deploy_to]}/current/bookr-config.js" do
+  template "#{deploy[:deploy_to]}/current/bookr-config.json" do
     cookbook 'bookr'
     source 'bookr-config.json.erb'
     mode '0660'
     owner deploy[:user]
     group deploy[:group]
-    variables(:isbndb => deploy[:isbndb], :server => deploy[:server])
   end
 end
